@@ -1,34 +1,75 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ViralAI Tools</title>
+<meta name="theme-color" content="#0b1020">
+<title>ViralAI Tools - AI Content Creator</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1020;color:#f5f7ff;font-family:Arial,sans-serif}
-header{text-align:center;padding:25px;background:linear-gradient(120deg,#382477,#123b55)}
+body{
+ margin:0;background:#0b1020;color:#f5f7ff;
+ font-family:Arial,sans-serif
+}
+header{
+ text-align:center;padding:25px 12px;
+ background:linear-gradient(120deg,#382477,#123b55)
+}
+header h1{margin:0;font-size:29px}
+header p{color:#dce5ff;margin-bottom:0}
 main{width:min(960px,94%);margin:18px auto}
-.panel{background:#151d32;border:1px solid #2d3a58;border-radius:14px;padding:16px;margin-bottom:14px}
+.panel{
+ background:#151d32;border:1px solid #2d3a58;
+ border-radius:14px;padding:16px;margin-bottom:14px
+}
 h2{font-size:19px;margin:0 0 12px}
 label{display:block;color:#b8c3dc;margin:12px 0 6px}
-select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #354361;background:#0d1629;color:white;font-size:15px}
-textarea{min-height:105px}
-button{padding:11px 14px;border:0;border-radius:9px;background:#8170ff;color:white;font-weight:bold;cursor:pointer}
+select,textarea{
+ width:100%;padding:12px;border-radius:9px;
+ border:1px solid #354361;background:#0d1629;
+ color:white;font-size:15px
+}
+textarea{min-height:105px;resize:vertical}
+button{
+ padding:11px 14px;border:0;border-radius:9px;
+ background:#8170ff;color:white;font-weight:bold;
+ cursor:pointer;font-size:14px
+}
 button:disabled{opacity:.5}
-.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.tool{background:#202c46;text-align:left;min-height:55px}
-.tool.active{outline:2px solid #9385ff}
+.tools{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:9px
+}
+.tool{
+ background:#202c46;text-align:left;min-height:62px;
+ display:flex;align-items:center;gap:9px;
+ border:1px solid #354361;padding:10px
+}
+.tool-icon{font-size:23px;flex-shrink:0}
+.tool-name{font-size:13px;line-height:1.3}
+.tool.active{
+ outline:2px solid #9385ff;background:#34315f
+}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#result{white-space:pre-wrap;overflow-wrap:anywhere;background:#0d1629;border:1px solid #354361;border-radius:9px;padding:14px;min-height:100px}
+#result{
+ white-space:pre-wrap;overflow-wrap:anywhere;
+ background:#0d1629;border:1px solid #354361;
+ border-radius:9px;padding:14px;min-height:100px
+}
 .small{color:#aebbd4;font-size:13px}
 .item{border-bottom:1px solid #354361;padding:10px 0}
 footer{text-align:center;color:#aebbd4;padding:20px}
-@media(min-width:650px){.tools{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:430px){.two{grid-template-columns:1fr}}
+@media(min-width:650px){
+ .tools{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:430px){
+ .two{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -37,37 +78,45 @@ footer{text-align:center;color:#aebbd4;padding:20px}
 </header>
 
 <main>
+
 <section class="panel">
-<h2>Choose Your Tool</h2>
+<h2>🧰 Choose Your Tool</h2>
 <div class="tools" id="tools"></div>
 </section>
 
 <section class="panel">
-<h2 id="selectedTool">Instagram Caption Generator</h2>
+<h2 id="selectedTool">📸 Instagram Caption Generator</h2>
 
 <label for="topic">Enter your topic or idea</label>
-<textarea id="topic" maxlength="2000" placeholder="Example: Motivational Instagram reel about success..."></textarea>
+<textarea id="topic" maxlength="2000"
+placeholder="Example: Motivational Instagram reel about success..."></textarea>
 
 <div class="two">
 <div>
-<label for="language">Output Language</label>
+<label for="language">🌐 Output Language</label>
 <select id="language">
 <option value="auto">Auto Detect</option>
-<option>English</option><option>Hindi</option><option>Telugu</option>
-<option>Tamil</option><option>Bengali</option><option>Urdu</option>
-<option>Marathi</option><option>Gujarati</option><option>Punjabi</option>
-<option>Kannada</option><option>Malayalam</option><option>Odia</option>
-<option>Arabic</option><option>Spanish</option><option>French</option>
-<option>German</option><option>Portuguese</option><option>Japanese</option>
-<option>Korean</option><option>Chinese</option><option>Russian</option>
+<option>English</option><option>Hindi</option>
+<option>Telugu</option><option>Tamil</option>
+<option>Bengali</option><option>Urdu</option>
+<option>Marathi</option><option>Gujarati</option>
+<option>Punjabi</option><option>Kannada</option>
+<option>Malayalam</option><option>Odia</option>
+<option>Arabic</option><option>Spanish</option>
+<option>French</option><option>German</option>
+<option>Portuguese</option><option>Japanese</option>
+<option>Korean</option><option>Chinese</option>
+<option>Russian</option>
 </select>
 </div>
+
 <div>
-<label for="tone">Content Tone</label>
+<label for="tone">🎨 Content Tone</label>
 <select id="tone">
-<option>Engaging</option><option>Funny</option><option>Emotional</option>
-<option>Motivational</option><option>Professional</option>
-<option>Friendly</option><option>Short and catchy</option>
+<option>Engaging</option><option>Funny</option>
+<option>Emotional</option><option>Motivational</option>
+<option>Professional</option><option>Friendly</option>
+<option>Short and catchy</option>
 </select>
 </div>
 </div>
@@ -76,14 +125,15 @@ footer{text-align:center;color:#aebbd4;padding:20px}
 <button id="generateBtn" onclick="generate()">✨ Generate with AI</button>
 <button onclick="clearInput()">Clear</button>
 </div>
+
 <p class="small" id="status">Choose a tool and enter your topic.</p>
 </section>
 
 <section class="panel">
-<h2>AI Result</h2>
+<h2>🤖 AI Result</h2>
 <div id="result">Your AI result will appear here.</div>
 <div class="actions">
-<button onclick="copyResult()">Copy Result</button>
+<button onclick="copyResult()">📋 Copy Result</button>
 <button onclick="saveFavorite()">♡ Save Favorite</button>
 </div>
 </section>
@@ -100,175 +150,259 @@ footer{text-align:center;color:#aebbd4;padding:20px}
 </section>
 
 <section class="panel">
-<h2>About</h2>
-<p class="small">ViralAI helps creators generate captions, hashtags, scripts, video ideas and social media content.</p>
+<h2>ℹ️ About</h2>
+<p class="small">
+ViralAI helps creators generate captions, hashtags, scripts,
+video ideas and social media content.
+</p>
 </section>
 
 <section class="panel">
-<h2>Privacy</h2>
-<p class="small">Your topic and selected options are sent to the AI service to generate content. Favorites and history are stored in your browser. Do not enter passwords or sensitive information.</p>
+<h2>🔒 Privacy</h2>
+<p class="small">
+Your topic and selected options are sent to the AI service
+to generate content. Favorites and history are stored in
+your browser. Do not enter passwords or sensitive information.
+</p>
 </section>
 
 <section class="panel">
-<h2>Disclaimer</h2>
-<p class="small">AI results may need editing. ViralAI does not guarantee views, followers, virality or income.</p>
+<h2>⚠️ Disclaimer</h2>
+<p class="small">
+AI results may need editing. ViralAI does not guarantee views,
+followers, virality or income.
+</p>
 </section>
+
 </main>
 
-<footer>ViralAI Tools · Made for Creators</footer>
+<footer>🚀 ViralAI Tools · Made for Creators</footer>
 
 <script>
 const API="https://viralai-ai-api.tufan824708.workers.dev";
 
-const toolNames=[
-"Instagram Caption Generator",
-"Hashtag Generator",
-"Reels Script Generator",
-"YouTube Title Generator",
-"YouTube Description",
-"Video Ideas Generator",
-"Instagram Bio Generator",
-"Viral Hook Generator",
-"Call To Action Generator",
-"Instagram Story Ideas",
-"Motivational Quotes",
-"Facebook Post Generator",
-"Product Description",
-"Ad Copy Generator",
-"Blog Outline Generator",
-"SEO Keyword Ideas",
-"Thumbnail Text Generator",
-"Content Calendar",
-"Username Ideas",
-"Short Video Storyboard"
+const toolsList=[
+ ["📸","Instagram Caption Generator"],
+ ["#️⃣","Hashtag Generator"],
+ ["🎬","Reels Script Generator"],
+ ["▶️","YouTube Title Generator"],
+ ["📝","YouTube Description"],
+ ["💡","Video Ideas Generator"],
+ ["👤","Instagram Bio Generator"],
+ ["🔥","Viral Hook Generator"],
+ ["👉","Call To Action Generator"],
+ ["📱","Instagram Story Ideas"],
+ ["💪","Motivational Quotes"],
+ ["📘","Facebook Post Generator"],
+ ["🛍️","Product Description"],
+ ["📢","Ad Copy Generator"],
+ ["✍️","Blog Outline Generator"],
+ ["🔍","SEO Keyword Ideas"],
+ ["🖼️","Thumbnail Text Generator"],
+ ["📅","Content Calendar"],
+ ["✨","Username Ideas"],
+ ["🎥","Short Video Storyboard"]
 ];
 
-let selectedTool=toolNames[0];
+let selectedTool=toolsList[0][1];
 let latestResult="";
 
-toolNames.forEach(name=>{
-  const button=document.createElement("button");
-  button.className="tool"+(name===selectedTool?" active":"");
-  button.textContent=name;
-  button.onclick=()=>selectTool(name);
-  document.getElementById("tools").appendChild(button);
+const toolsBox=document.getElementById("tools");
+
+toolsList.forEach(([icon,name])=>{
+ const button=document.createElement("button");
+ button.className="tool"+(name===selectedTool?" active":"");
+
+ const iconSpan=document.createElement("span");
+ iconSpan.className="tool-icon";
+ iconSpan.textContent=icon;
+
+ const nameSpan=document.createElement("span");
+ nameSpan.className="tool-name";
+ nameSpan.textContent=name;
+
+ button.append(iconSpan,nameSpan);
+ button.onclick=()=>selectTool(name);
+ toolsBox.appendChild(button);
 });
 
+function getIcon(name){
+ const item=toolsList.find(tool=>tool[1]===name);
+ return item?item[0]:"✨";
+}
+
 function selectTool(name){
-  selectedTool=name;
-  document.getElementById("selectedTool").textContent=name;
-  document.querySelectorAll(".tool").forEach(button=>{
-    button.classList.toggle("active",button.textContent===name);
-  });
+ selectedTool=name;
+ document.getElementById("selectedTool").textContent=
+ getIcon(name)+" "+name;
+
+ document.querySelectorAll(".tool").forEach(button=>{
+  const buttonName=button.querySelector(".tool-name").textContent;
+  button.classList.toggle("active",buttonName===name);
+ });
 }
 
 function readStore(key){
-  try{return JSON.parse(localStorage.getItem(key)||"[]");}
-  catch{return [];}
+ try{return JSON.parse(localStorage.getItem(key)||"[]");}
+ catch{return [];}
 }
 
 function writeStore(key,value){
+ try{
   localStorage.setItem(key,JSON.stringify(value));
+ }catch(error){
+  alert("Browser storage is full. Please clear some old data.");
+ }
 }
 
 async function generate(){
-  const topic=document.getElementById("topic").value.trim();
-  const language=document.getElementById("language").value;
-  const tone=document.getElementById("tone").value;
-  const button=document.getElementById("generateBtn");
-  const resultBox=document.getElementById("result");
-  const status=document.getElementById("status");
+ const topic=document.getElementById("topic").value.trim();
+ const language=document.getElementById("language").value;
+ const tone=document.getElementById("tone").value;
+ const button=document.getElementById("generateBtn");
+ const resultBox=document.getElementById("result");
+ const status=document.getElementById("status");
 
-  if(!topic){status.textContent="Please enter a topic first.";return;}
+ if(!topic){
+  status.textContent="Please enter a topic first.";
+  return;
+ }
 
-  button.disabled=true;
-  button.textContent="Generating...";
-  status.textContent="AI is creating your content...";
-  resultBox.textContent="Please wait...";
+ button.disabled=true;
+ button.textContent="Generating...";
+ status.textContent="AI is creating your content...";
+ resultBox.textContent="Please wait...";
 
-  try{
-    const response=await fetch(API,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({topic,tool:selectedTool,language,tone})
-    });
+ try{
+  const response=await fetch(API,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    topic,
+    tool:selectedTool,
+    language,
+    tone
+   })
+  });
 
-    const data=await response.json();
-    if(!response.ok)throw new Error(data.error||"AI request failed.");
-    if(!data.result)throw new Error("No result received.");
+  const data=await response.json();
 
-    latestResult=data.result;
-    resultBox.textContent=latestResult;
-    status.textContent="Your content is ready!";
-
-    const history=readStore("viralai_history");
-    history.unshift({tool:selectedTool,result:latestResult,date:new Date().toLocaleString()});
-    writeStore("viralai_history",history.slice(0,15));
-    showHistory();
-
-  }catch(error){
-    resultBox.textContent="Could not generate content.";
-    status.textContent=error.message;
-  }finally{
-    button.disabled=false;
-    button.textContent="✨ Generate with AI";
+  if(!response.ok){
+   throw new Error(data.error||"AI request failed.");
   }
+
+  if(!data.result){
+   throw new Error("No result received.");
+  }
+
+  latestResult=data.result;
+  resultBox.textContent=latestResult;
+  status.textContent="Your content is ready!";
+
+  const history=readStore("viralai_history");
+  history.unshift({
+   tool:selectedTool,
+   result:latestResult,
+   date:new Date().toLocaleString()
+  });
+
+  writeStore("viralai_history",history.slice(0,15));
+  showHistory();
+
+ }catch(error){
+  resultBox.textContent="Could not generate content.";
+  status.textContent=error.message;
+ }finally{
+  button.disabled=false;
+  button.textContent="✨ Generate with AI";
+ }
 }
 
 async function copyResult(){
-  if(!latestResult){alert("Generate content first.");return;}
-  try{
-    await navigator.clipboard.writeText(latestResult);
-    alert("Copied!");
-  }catch{alert("Please select and copy the result manually.");}
+ if(!latestResult){
+  alert("Generate content first.");
+  return;
+ }
+
+ try{
+  await navigator.clipboard.writeText(latestResult);
+  alert("Copied!");
+ }catch{
+  alert("Please select and copy the result manually.");
+ }
 }
 
 function saveFavorite(){
-  if(!latestResult){alert("Generate content first.");return;}
-  const favorites=readStore("viralai_favorites");
-  favorites.unshift({tool:selectedTool,result:latestResult,date:new Date().toLocaleString()});
-  writeStore("viralai_favorites",favorites.slice(0,30));
-  showFavorites();
-  alert("Saved!");
+ if(!latestResult){
+  alert("Generate content first.");
+  return;
+ }
+
+ const favorites=readStore("viralai_favorites");
+
+ favorites.unshift({
+  tool:selectedTool,
+  result:latestResult,
+  date:new Date().toLocaleString()
+ });
+
+ writeStore("viralai_favorites",favorites.slice(0,30));
+ showFavorites();
+ alert("Saved!");
 }
 
 function displayItems(key,id){
-  const box=document.getElementById(id);
-  const items=readStore(key);
-  box.replaceChildren();
-  if(!items.length){box.textContent="Nothing here yet.";return;}
+ const box=document.getElementById(id);
+ const items=readStore(key);
 
-  items.forEach(item=>{
-    const div=document.createElement("div");
-    div.className="item";
-    const heading=document.createElement("strong");
-    heading.textContent=item.tool+" · "+item.date;
-    const content=document.createElement("p");
-    content.textContent=item.result;
-    div.append(heading,content);
-    box.appendChild(div);
-  });
+ box.replaceChildren();
+
+ if(!items.length){
+  box.textContent="Nothing here yet.";
+  return;
+ }
+
+ items.forEach(item=>{
+  const div=document.createElement("div");
+  div.className="item";
+
+  const heading=document.createElement("strong");
+  heading.textContent=getIcon(item.tool)+" "+item.tool+" · "+item.date;
+
+  const content=document.createElement("p");
+  content.textContent=item.result;
+
+  div.append(heading,content);
+  box.appendChild(div);
+ });
 }
 
-function showFavorites(){displayItems("viralai_favorites","favorites");}
-function showHistory(){displayItems("viralai_history","history");}
+function showFavorites(){
+ displayItems("viralai_favorites","favorites");
+}
+
+function showHistory(){
+ displayItems("viralai_history","history");
+}
 
 function clearHistory(){
-  if(confirm("Clear recent history?")){
-    localStorage.removeItem("viralai_history");
-    showHistory();
-  }
+ if(confirm("Clear recent history?")){
+  localStorage.removeItem("viralai_history");
+  showHistory();
+ }
 }
 
 function clearInput(){
-  document.getElementById("topic").value="";
-  document.getElementById("result").textContent="Your AI result will appear here.";
-  document.getElementById("status").textContent="Enter a new topic.";
-  latestResult="";
+ document.getElementById("topic").value="";
+ document.getElementById("result").textContent=
+ "Your AI result will appear here.";
+ document.getElementById("status").textContent="Enter a new topic.";
+ latestResult="";
 }
 
 showFavorites();
 showHistory();
 </script>
+
 </body>
 </html>
