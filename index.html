@@ -1,127 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111827">
-<title>ViralAI Tools — Free Creator Toolkit</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ViralAI Tools</title>
 <style>
-:root{--bg:#0a1020;--panel:#131d33;--panel2:#1b2945;--text:#f5f7ff;--muted:#aab7d1;--accent:#a78bfa;--cyan:#38bdf8;--line:#2b3a59}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#202b55 0,#0a1020 58%);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
-header,.wrap{max-width:1050px;margin:auto;padding-left:16px;padding-right:16px}header{padding-top:22px;padding-bottom:12px}
-.brand{font-weight:900;font-size:26px;letter-spacing:-.8px}.brand span{color:var(--accent)}.tag{color:var(--muted);margin:5px 0 18px}
-.hero{background:linear-gradient(120deg,#312e81,#5b21b6 55%,#075985);padding:22px;border-radius:22px;box-shadow:0 16px 48px #0005}
-.hero h1{font-size:clamp(26px,6vw,40px);line-height:1.1;margin:0 0 9px}.hero p{color:#e6eaff;margin:0 0 15px}
-.search,.field,.lang{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:#0c1529;color:white;font:inherit;outline:none}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 12px}.topline h2{font-size:19px;margin:0}.lang{width:auto}
-.tabs{display:flex;gap:8px;overflow:auto;padding:5px 0 12px}.tab,.btn{border:0;border-radius:11px;padding:11px 14px;background:linear-gradient(100deg,#8b5cf6,#0ea5e9);color:white;font-weight:750;cursor:pointer;white-space:nowrap}.tab{background:var(--panel2);border:1px solid var(--line)}.tab.active{background:#46358a;border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tool{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel),#10182b);padding:14px;border-radius:16px;text-align:left;color:white;min-height:108px;cursor:pointer}.tool.active{border-color:var(--accent);background:#25234b}.tool .emoji{font-size:22px}.tool b{display:block;margin:6px 0 3px}.tool small{color:var(--muted);line-height:1.35}
-.editor,.panel{display:none;margin-top:17px;padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:18px}.editor.show,.panel.show{display:block}.editor h3,.panel h3{margin:0 0 5px}.muted,.editor p{color:var(--muted);font-size:14px}.field{display:block;margin:9px 0}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btn.secondary{background:var(--panel2);border:1px solid var(--line)}#output{white-space:pre-wrap;line-height:1.55;background:#0b1326;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:13px;min-height:85px;color:#eef2ff}
-.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:18px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.mini{background:#0d172c;border:1px solid var(--line);border-radius:13px;padding:12px}.mini b{display:block;margin-bottom:4px}.listitem{padding:10px 0;border-bottom:1px solid var(--line)}footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 15px;border-top:1px solid var(--line);margin-top:30px}footer button{background:none;border:0;color:#c4b5fd;text-decoration:underline;padding:6px;cursor:pointer}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:30px}.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
-</style></head>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f5f7ff;font-family:Arial,sans-serif}
+header{text-align:center;padding:25px;background:linear-gradient(120deg,#382477,#123b55)}
+main{width:min(960px,94%);margin:18px auto}
+.panel{background:#151d32;border:1px solid #2d3a58;border-radius:14px;padding:16px;margin-bottom:14px}
+h2{font-size:19px;margin:0 0 12px}
+label{display:block;color:#b8c3dc;margin:12px 0 6px}
+select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #354361;background:#0d1629;color:white;font-size:15px}
+textarea{min-height:105px}
+button{padding:11px 14px;border:0;border-radius:9px;background:#8170ff;color:white;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5}
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.tool{background:#202c46;text-align:left;min-height:55px}
+.tool.active{outline:2px solid #9385ff}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#result{white-space:pre-wrap;overflow-wrap:anywhere;background:#0d1629;border:1px solid #354361;border-radius:9px;padding:14px;min-height:100px}
+.small{color:#aebbd4;font-size:13px}
+.item{border-bottom:1px solid #354361;padding:10px 0}
+footer{text-align:center;color:#aebbd4;padding:20px}
+@media(min-width:650px){.tools{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:430px){.two{grid-template-columns:1fr}}
+</style>
+</head>
 <body>
+
 <header>
- <div class="brand">ViralAI <span>Tools</span></div><div class="tag" id="tagline">Free creator toolkit · No login required</div>
- <section class="hero"><h1 id="heroTitle">Create better content, faster.</h1><p id="heroDesc">Free helpers for Instagram, YouTube and everyday ideas.</p><input class="search" id="search" placeholder="Search tools…" aria-label="Search tools"></section>
+<h1>🚀 ViralAI Tools</h1>
+<p>AI Content Creator for Social Media</p>
 </header>
-<main class="wrap">
- <div class="topline"><h2 id="toolsTitle">Explore 20 free tools</h2><select class="lang" id="lang" aria-label="Language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option></select></div>
- <nav class="tabs" aria-label="Sections">
-  <button class="tab active" data-view="tools">All tools</button><button class="tab" data-view="favorites">Favorites</button><button class="tab" data-view="history">History</button><button class="tab" data-view="about">About</button>
- </nav>
- <div class="grid" id="grid"></div>
- <section class="editor" id="editor">
-  <h3 id="toolTitle">Tool</h3><p id="toolDesc">Enter a topic to generate ideas.</p>
-  <input class="field" id="topic" placeholder="Enter your topic, niche or video idea">
-  <select class="field" id="tone"><option value="engaging">Engaging</option><option value="emotional">Emotional</option><option value="funny">Funny</option><option value="professional">Professional</option></select>
-  <div class="btnrow"><button class="btn" id="generate">Generate</button><button class="btn secondary" id="copy">Copy result</button><button class="btn secondary" id="favorite">☆ Save favorite</button></div>
-  <div id="output" aria-live="polite">Your result will appear here.</div>
-  <p class="note" id="disclaimer">This free version uses built-in templates, not a live AI service. Review results before posting.</p>
- </section>
- <section class="panel" id="panel"></section>
- <p class="note">Privacy note: this demo keeps favorites and recent results in this browser on this device. It does not send your text to a server. Do not enter passwords, OTPs or private information.</p>
+
+<main>
+<section class="panel">
+<h2>Choose Your Tool</h2>
+<div class="tools" id="tools"></div>
+</section>
+
+<section class="panel">
+<h2 id="selectedTool">Instagram Caption Generator</h2>
+
+<label for="topic">Enter your topic or idea</label>
+<textarea id="topic" maxlength="2000" placeholder="Example: Motivational Instagram reel about success..."></textarea>
+
+<div class="two">
+<div>
+<label for="language">Output Language</label>
+<select id="language">
+<option value="auto">Auto Detect</option>
+<option>English</option><option>Hindi</option><option>Telugu</option>
+<option>Tamil</option><option>Bengali</option><option>Urdu</option>
+<option>Marathi</option><option>Gujarati</option><option>Punjabi</option>
+<option>Kannada</option><option>Malayalam</option><option>Odia</option>
+<option>Arabic</option><option>Spanish</option><option>French</option>
+<option>German</option><option>Portuguese</option><option>Japanese</option>
+<option>Korean</option><option>Chinese</option><option>Russian</option>
+</select>
+</div>
+<div>
+<label for="tone">Content Tone</label>
+<select id="tone">
+<option>Engaging</option><option>Funny</option><option>Emotional</option>
+<option>Motivational</option><option>Professional</option>
+<option>Friendly</option><option>Short and catchy</option>
+</select>
+</div>
+</div>
+
+<div class="actions">
+<button id="generateBtn" onclick="generate()">✨ Generate with AI</button>
+<button onclick="clearInput()">Clear</button>
+</div>
+<p class="small" id="status">Choose a tool and enter your topic.</p>
+</section>
+
+<section class="panel">
+<h2>AI Result</h2>
+<div id="result">Your AI result will appear here.</div>
+<div class="actions">
+<button onclick="copyResult()">Copy Result</button>
+<button onclick="saveFavorite()">♡ Save Favorite</button>
+</div>
+</section>
+
+<section class="panel">
+<h2>⭐ Favorites</h2>
+<div id="favorites" class="small">No favorites yet.</div>
+</section>
+
+<section class="panel">
+<h2>🕘 Recent History</h2>
+<div id="history" class="small">No history yet.</div>
+<button onclick="clearHistory()">Clear History</button>
+</section>
+
+<section class="panel">
+<h2>About</h2>
+<p class="small">ViralAI helps creators generate captions, hashtags, scripts, video ideas and social media content.</p>
+</section>
+
+<section class="panel">
+<h2>Privacy</h2>
+<p class="small">Your topic and selected options are sent to the AI service to generate content. Favorites and history are stored in your browser. Do not enter passwords or sensitive information.</p>
+</section>
+
+<section class="panel">
+<h2>Disclaimer</h2>
+<p class="small">AI results may need editing. ViralAI does not guarantee views, followers, virality or income.</p>
+</section>
 </main>
-<footer>© 2026 ViralAI Tools · Free creator helpers<br>
- <button data-page="privacy">Privacy</button><button data-page="terms">Terms</button><button data-page="contact">Contact</button><button data-page="disclaimer">Disclaimer</button>
-</footer>
+
+<footer>ViralAI Tools · Made for Creators</footer>
+
 <script>
-const tools=[
-['caption','✍️','Caption Generator','Write a caption for your post.'],
-['hashtags','＃','Hashtag Ideas','Create related hashtag suggestions.'],
-['bio','👤','Instagram Bio','Draft a short creator bio.'],
-['reels','🎬','Reels Script','Build a short-video outline.'],
-['ytTitle','▶️','YouTube Title','Suggest video title ideas.'],
-['ytDesc','📝','YouTube Description','Draft a video description.'],
-['ytTags','🏷️','YouTube Tags','Create related tags.'],
-['shorts','📱','Shorts Script','Outline a YouTube Short.'],
-['quote','💡','Motivational Quote','Create an original motivational line.'],
-['shayari','🌹','Shayari Starter','Create a short original poetic line.'],
-['love','💌','Message Writer','Draft a friendly or caring message.'],
-['story','📖','Story Idea','Create a short story concept.'],
-['business','💼','Business Name Ideas','Suggest project or business names.'],
-['slogan','📣','Slogan Generator','Draft a catchy slogan.'],
-['ideas','🧠','Content Ideas','Find post and video ideas.'],
-['thumbnail','🖼️','Thumbnail Ideas','Plan a clear video thumbnail concept.'],
-['hook','🪝','Hook Generator','Write opening lines that grab attention.'],
-['cta','👉','Call-to-Action','Suggest a natural audience prompt.'],
-['product','🛍️','Product Description','Draft a simple product description.'],
-['faq','❓','FAQ Generator','Create questions for a topic.']
+const API="https://viralai-ai-api.tufan824708.workers.dev";
+
+const toolNames=[
+"Instagram Caption Generator",
+"Hashtag Generator",
+"Reels Script Generator",
+"YouTube Title Generator",
+"YouTube Description",
+"Video Ideas Generator",
+"Instagram Bio Generator",
+"Viral Hook Generator",
+"Call To Action Generator",
+"Instagram Story Ideas",
+"Motivational Quotes",
+"Facebook Post Generator",
+"Product Description",
+"Ad Copy Generator",
+"Blog Outline Generator",
+"SEO Keyword Ideas",
+"Thumbnail Text Generator",
+"Content Calendar",
+"Username Ideas",
+"Short Video Storyboard"
 ];
-const $=id=>document.getElementById(id);let selected='caption',view='tools',lastResult='';
-const read=(k)=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return []}};
-const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-function slug(s){return s.trim().replace(/[^\p{L}\p{N}]+/gu,'').slice(0,24)||'Topic'}
-function render(){
- const q=$('search').value.toLowerCase();let list=tools;
- if(view==='favorites'){let ids=read('v_favs');list=tools.filter(t=>ids.includes(t[0]))}
- if(view==='history'){let hist=read('v_history');$('grid').innerHTML=hist.length?hist.slice().reverse().map((h,i)=>`<button class="tool" data-hist="${hist.length-1-i}"><span class="emoji">🕘</span><b>${esc(h.name)}</b><small>${esc(h.topic)}</small></button>`).join(''):'<p class="muted">No generated results yet.</p>';document.querySelectorAll('[data-hist]').forEach(b=>b.onclick=()=>{let h=hist[+b.dataset.hist];$('toolTitle').textContent=h.name;$('output').textContent=h.result;$('editor').classList.add('show');$('topic').value=h.topic;lastResult=h.result;$('editor').scrollIntoView({behavior:'smooth'})});return}
- list=list.filter(t=>(t[2]+' '+t[3]).toLowerCase().includes(q));
- $('grid').innerHTML=list.length?list.map(t=>`<button class="tool ${selected===t[0]?'active':''}" data-id="${t[0]}"><span class="emoji">${t[1]}</span><b>${t[2]}</b><small>${t[3]}</small></button>`).join(''):'<p class="muted">No matching tools.</p>';
- document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>choose(b.dataset.id));
+
+let selectedTool=toolNames[0];
+let latestResult="";
+
+toolNames.forEach(name=>{
+  const button=document.createElement("button");
+  button.className="tool"+(name===selectedTool?" active":"");
+  button.textContent=name;
+  button.onclick=()=>selectTool(name);
+  document.getElementById("tools").appendChild(button);
+});
+
+function selectTool(name){
+  selectedTool=name;
+  document.getElementById("selectedTool").textContent=name;
+  document.querySelectorAll(".tool").forEach(button=>{
+    button.classList.toggle("active",button.textContent===name);
+  });
 }
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function choose(id){selected=id;view='tools';document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view==='tools'));let t=tools.find(x=>x[0]===id);$('toolTitle').textContent=t[2];$('toolDesc').textContent=t[3];$('editor').classList.add('show');$('panel').classList.remove('show');$('output').textContent='Your result will appear here.';lastResult='';render();$('editor').scrollIntoView({behavior:'smooth',block:'start'})}
-function generate(){
- let topic=$('topic').value.trim();if(!topic){$('output').textContent='Please enter a topic first.';return}
- let out='',tone=$('tone').value;
- switch(selected){
- case'caption':out=`${topic} ✨\nSmall moments, big memories. What do you think? 💬\n\n#${slug(topic)} #DailyInspiration #ContentCreator`;break;
- case'hashtags':out=[slug(topic),'TrendingNow','ContentCreator','ExploreMore','DailyInspiration','ReelsIndia','CreatorCommunity','InstaDaily'].map(x=>'#'+x).join(' ');break;
- case'bio':out=`✨ ${topic}\nCreating • Learning • Growing\n📍 India | Follow for more`;break;
- case'reels':out=`REEL IDEA: ${topic}\n\nHOOK (0–3 sec): “Wait—here’s something about ${topic}!”\nMAIN (3–15 sec): Share 2–3 useful points or show the process.\nENDING: Ask viewers to save or share if useful.`;break;
- case'ytTitle':out=[`${topic}: What You Should Know`,`5 Things About ${topic}`,`A Simple Guide to ${topic}`,`My Experience with ${topic}`].join('\n');break;
- case'ytDesc':out=`In this video, we explore ${topic}.\n\nIf you find this useful, like the video and share your thoughts in the comments.\n\nSubscribe for more content.\n\n#${slug(topic)} #YouTubeIndia`;break;
- case'ytTags':out=[topic,topic+' tips',topic+' Hindi',topic+' tutorial','India','beginner guide','how to'].join(', ');break;
- case'shorts':out=`SHORT: ${topic}\n\n1. Start with a question.\n2. Show one clear example.\n3. Share the key takeaway.\n4. End with a useful follow prompt.`;break;
- case'quote':out=`“Every small step toward ${topic} is progress. Keep learning and keep moving.”`;break;
- case'shayari':out=`${topic} का सफ़र आसान नहीं होता,\nमगर हौसला हो तो रास्ता अनजान नहीं होता।`;break;
- case'love':out=`I wanted to tell you that ${topic} means a lot to me. I appreciate your kindness and the good moments we share.`;break;
- case'story':out=`STORY IDEA: ${topic}\nA beginner discovers an unexpected opportunity. They face a difficult choice, learn something important, and use that lesson to help someone else.`;break;
- case'business':out=[topic+' Studio',topic+' Hub',topic+' Works',topic+' Spark',topic+' World'].join('\n');break;
- case'slogan':out=`${topic} — Simple ideas. Meaningful results.`;break;
- case'ideas':out=[`A beginner's guide to ${topic}`,`3 common mistakes about ${topic}`,`Myth vs fact: ${topic}`,`A quick tip that makes ${topic} easier`,`Answer a frequently asked question about ${topic}`].join('\n');break;
- case'thumbnail':out=`THUMBNAIL CONCEPT: ${topic}\nMain subject: one clear person or object.\nText: 3–5 large readable words.\nVisual: strong contrast and uncluttered background.\nAvoid misleading images or promises.`;break;
- case'hook':out=[`“Have you ever wondered about ${topic}?”`,`“Here are 3 things I wish I knew about ${topic}.”`,`“Stop scrolling—try this simple ${topic} tip.”`,`“Let's make ${topic} easier in 30 seconds.”`].join('\n');break;
- case'cta':out=[`What do you think about ${topic}? Share your view below.`,`Save this if it was useful.`,`Send this to someone who may find ${topic} helpful.`,`Follow for more simple tips about ${topic}.`].join('\n');break;
- case'product':out=`${topic}\n\nA practical choice for people looking for ${topic}. Designed to make everyday use simple and convenient. Check the product details, features and suitability before buying.`;break;
- case'faq':out=[`What is ${topic}?`,`Who is ${topic} useful for?`,`How does ${topic} work?`,`What should beginners know about ${topic}?`,`What are common mistakes related to ${topic}?`].join('\n');break;
- }
- if(tone==='funny')out+='\n\nKeep it light and have fun!';if(tone==='professional')out+='\n\nKeep the wording clear, useful and audience-focused.';if(tone==='emotional')out+='\n\nUse a genuine, personal tone.';
- lastResult=out;$('output').textContent=out;
- let h=read('v_history');h.push({id:selected,name:tools.find(t=>t[0]===selected)[2],topic,result:out});save('v_history',h.slice(-30));
+
+function readStore(key){
+  try{return JSON.parse(localStorage.getItem(key)||"[]");}
+  catch{return [];}
 }
-$('search').addEventListener('input',render);$('generate').onclick=generate;
-$('copy').onclick=async()=>{try{await navigator.clipboard.writeText($('output').textContent);$('copy').textContent='Copied!';setTimeout(()=>$('copy').textContent='Copy result',1200)}catch(e){$('copy').textContent='Select text to copy'}};
-$('favorite').onclick=()=>{let f=read('v_favs');if(!f.includes(selected))f.push(selected);save('v_favs',f);$('favorite').textContent='★ Saved';setTimeout(()=>$('favorite').textContent='☆ Save favorite',1200)};
-function showPanel(kind){$('editor').classList.remove('show');$('grid').innerHTML='';$('panel').classList.add('show');let content={
-about:'<h3>About ViralAI Tools</h3><p class="muted">ViralAI Tools is a free starter toolkit for creators. It provides writing prompts and templates for social content. It is an independent project and is not affiliated with Instagram, YouTube or Google.</p>',
-privacy:'<h3>Privacy</h3><p class="muted">This demo does not have an account system or server database. Favorites and recent results are stored locally in this browser using device storage. Clearing browser data may remove them. Do not enter sensitive personal information.</p>',
-terms:'<h3>Terms & Conditions</h3><p class="muted">Use the suggestions responsibly and review them before publishing. You are responsible for checking platform rules, facts, copyright and permissions. Tools are provided as-is without guarantees.</p>',
-contact:'<h3>Contact</h3><p class="muted">Contact page placeholder: add a real support email address before publishing publicly. Do not publish a fake contact address.</p>',
-disclaimer:'<h3>Disclaimer</h3><p class="muted">Generated content uses built-in templates and is not professional advice. No guarantee of views, followers, sales, job offers or earnings. This version does not use a live AI model or paid API.</p>'
-};$('panel').innerHTML=content[kind]||content.about}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));$('editor').classList.remove('show');$('panel').classList.remove('show');if(view==='about')showPanel('about');else render()});
-document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>showPanel(b.dataset.page));
-$('lang').onchange=e=>{let l=e.target.value;if(l==='hi'){$('tagline').textContent='मुफ़्त क्रिएटर टूलकिट · लॉगिन की ज़रूरत नहीं';$('heroTitle').textContent='बेहतर कंटेंट, कम समय में।';$('heroDesc').textContent='Instagram और YouTube के लिए मुफ़्त टूल।';$('toolsTitle').textContent='20 मुफ़्त टूल देखें';$('search').placeholder='टूल खोजें…';$('generate').textContent='बनाएँ';$('copy').textContent='कॉपी करें'}else if(l==='te'){$('tagline').textContent='ఉచిత క్రియేటర్ టూల్స్ · లాగిన్ అవసరం లేదు';$('heroTitle').textContent='మంచి కంటెంట్‌ను వేగంగా సృష్టించండి';$('heroDesc').textContent='Instagram మరియు YouTube కోసం ఉచిత టూల్స్';$('toolsTitle').textContent='20 ఉచిత టూల్స్';$('search').placeholder='టూల్స్ వెతకండి…';$('generate').textContent='సృష్టించండి';$('copy').textContent='కాపీ చేయండి'}else{$('tagline').textContent='Free creator toolkit · No login required';$('heroTitle').textContent='Create better content, faster.';$('heroDesc').textContent='Free helpers for Instagram, YouTube and everyday ideas.';$('toolsTitle').textContent='Explore 20 free tools';$('search').placeholder='Search tools…';$('generate').textContent='Generate';$('copy').textContent='Copy result'}};
-render();choose('caption');
-</script></body></html>
+
+function writeStore(key,value){
+  localStorage.setItem(key,JSON.stringify(value));
+}
+
+async function generate(){
+  const topic=document.getElementById("topic").value.trim();
+  const language=document.getElementById("language").value;
+  const tone=document.getElementById("tone").value;
+  const button=document.getElementById("generateBtn");
+  const resultBox=document.getElementById("result");
+  const status=document.getElementById("status");
+
+  if(!topic){status.textContent="Please enter a topic first.";return;}
+
+  button.disabled=true;
+  button.textContent="Generating...";
+  status.textContent="AI is creating your content...";
+  resultBox.textContent="Please wait...";
+
+  try{
+    const response=await fetch(API,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({topic,tool:selectedTool,language,tone})
+    });
+
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||"AI request failed.");
+    if(!data.result)throw new Error("No result received.");
+
+    latestResult=data.result;
+    resultBox.textContent=latestResult;
+    status.textContent="Your content is ready!";
+
+    const history=readStore("viralai_history");
+    history.unshift({tool:selectedTool,result:latestResult,date:new Date().toLocaleString()});
+    writeStore("viralai_history",history.slice(0,15));
+    showHistory();
+
+  }catch(error){
+    resultBox.textContent="Could not generate content.";
+    status.textContent=error.message;
+  }finally{
+    button.disabled=false;
+    button.textContent="✨ Generate with AI";
+  }
+}
+
+async function copyResult(){
+  if(!latestResult){alert("Generate content first.");return;}
+  try{
+    await navigator.clipboard.writeText(latestResult);
+    alert("Copied!");
+  }catch{alert("Please select and copy the result manually.");}
+}
+
+function saveFavorite(){
+  if(!latestResult){alert("Generate content first.");return;}
+  const favorites=readStore("viralai_favorites");
+  favorites.unshift({tool:selectedTool,result:latestResult,date:new Date().toLocaleString()});
+  writeStore("viralai_favorites",favorites.slice(0,30));
+  showFavorites();
+  alert("Saved!");
+}
+
+function displayItems(key,id){
+  const box=document.getElementById(id);
+  const items=readStore(key);
+  box.replaceChildren();
+  if(!items.length){box.textContent="Nothing here yet.";return;}
+
+  items.forEach(item=>{
+    const div=document.createElement("div");
+    div.className="item";
+    const heading=document.createElement("strong");
+    heading.textContent=item.tool+" · "+item.date;
+    const content=document.createElement("p");
+    content.textContent=item.result;
+    div.append(heading,content);
+    box.appendChild(div);
+  });
+}
+
+function showFavorites(){displayItems("viralai_favorites","favorites");}
+function showHistory(){displayItems("viralai_history","history");}
+
+function clearHistory(){
+  if(confirm("Clear recent history?")){
+    localStorage.removeItem("viralai_history");
+    showHistory();
+  }
+}
+
+function clearInput(){
+  document.getElementById("topic").value="";
+  document.getElementById("result").textContent="Your AI result will appear here.";
+  document.getElementById("status").textContent="Enter a new topic.";
+  latestResult="";
+}
+
+showFavorites();
+showHistory();
+</script>
+</body>
+</html>
